@@ -16,16 +16,23 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             
         }
+        document.getElementById("answer-box").addEventListener("keydown",function(event) {
+        if (event.key === "Enter"){ // if the key that was pressed is enter, run the function
+            checkAnswer()
+        }
+      });
         runGame("addition"); // runs game as soon as page is loaded
     });
-
-    
 
     /**
      * The main game "loop" called when the script is first loaded
      * and after the user answers has been processed
      */
-function runGame(gameType) { // game type is being passed into function
+function runGame(gameType) {
+    document.getElementById("answer-box").value=""; // removes any value from the answer box
+    document.getElementById("answer-box").focus(); // Puts cursor in answer box
+    
+    // game type is being passed into function
     // Creates random numbers
     let num1 = Math.floor(Math.random() *25)+1;
     let num2 =Math.floor(Math.random() *25)+1;
@@ -34,11 +41,13 @@ function runGame(gameType) { // game type is being passed into function
         displayAdditionQuestion(num1, num2)
     }else if (gameType === "multiply"){
         displayMultiplyQuestion(num1, num2);
+    }else if (gameType === "subtract"){
+        displaySubtractQuestion(num1, num2);    
     }else{
-            alert(`Unknown game type: ${gameType}`) // returns error message
+        alert(`Unknown game type: ${gameType}`) // returns error message
         throw`unknown game type: ${gameType}. Aborting`; // stops game from running and prints to console for debugging
-
     }
+
 }
 /**
  * Checks the answer agaisnt the first element in
@@ -81,6 +90,8 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "addition"];
     }else if (operator ==="x") {
         return [operand1 * operand2, "multiply"];
+    }else if (operator ==="-") {
+        return [operand1 - operand2, "subtract"];    
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -111,8 +122,10 @@ function displayAdditionQuestion(operand1, operand2) { // arguments are operand 
 
 }
 
-function displaySubtractQuestion() {
-
+function displaySubtractQuestion(operand1, operand2) {
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2; // Asks if operand 1 is more than operand 2 and if yes display operand 1
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById("operator").textContent = "-"; // grabs the operator id and assigns it the - sign    
 }
 
 function displayMultiplyQuestion(operand1, operand2) {
