@@ -51,8 +51,10 @@ function checkAnswer() {
     
     if(isCorrect) {
         alert("hey! you got it right! :D")
+        incrementScore();
     }else{
         alert(`awwww you answerd ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnswer();
     }
 
     runGame(calculatedAnswer[1]) //Runs the same game again
@@ -82,12 +84,21 @@ function calculateCorrectAnswer() {
     }
 }
 
+/**
+ * get the current score from th DOM and increments it by 1
+ */
 function incrementScore() {
+    let oldScore = parseInt(document.getElementById("score").innerText); // creates a variable called old score from scire section in HTML Score is already set to 0 as a string
+    document.getElementById("score").innerText = ++oldScore; // increments the score by 1
 
 }
 
+/**
+ * get the current tally of incorrect answers
+ */
 function incrementWrongAnswer() {
-
+    let oldScore = parseInt(document.getElementById("incorrect").innerText); // creates a variable called old score from scire section in HTML Score is already set to 0 as a string
+    document.getElementById("incorrect").innerText = ++oldScore; // increments the score by 1
 }
 
 function displayAdditionQuestion(operand1, operand2) { // arguments are operand 1 and 2 these are the default number 0 diplayed on the question
