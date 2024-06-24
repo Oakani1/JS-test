@@ -32,13 +32,14 @@ function runGame(gameType) { // game type is being passed into function
 
     if (gameType ==="addition") {// if addion button pressed the run the displayAddiionQuestion with the 2 random numbers
         displayAdditionQuestion(num1, num2)
+    }else if (gameType === "multiply"){
+        displayMultiplyQuestion(num1, num2);
     }else{
-        alert(`Unknown game type: ${gameType}`) // returns error message
+            alert(`Unknown game type: ${gameType}`) // returns error message
         throw`unknown game type: ${gameType}. Aborting`; // stops game from running and prints to console for debugging
 
     }
 }
-
 /**
  * Checks the answer agaisnt the first element in
  * the returning calculateCorrectAnswer array
@@ -78,6 +79,8 @@ function calculateCorrectAnswer() {
 
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
+    }else if (operator ==="x") {
+        return [operand1 * operand2, "multiply"];
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -102,7 +105,7 @@ function incrementWrongAnswer() {
 }
 
 function displayAdditionQuestion(operand1, operand2) { // arguments are operand 1 and 2 these are the default number 0 diplayed on the question
-        document.getElementById("operand1").textContent = operand1; // the id in HTML is operan1, this converts i
+        document.getElementById("operand1").textContent = operand1; // the id in HTML is operan1, this converts it
         document.getElementById("operand2").textContent = operand2;
         document.getElementById("operator").textContent = "+"; // grabs the operator id and assigns it the + sign 
 
@@ -112,6 +115,8 @@ function displaySubtractQuestion() {
 
 }
 
-function displayMultiplyQuestion() {
-    
+function displayMultiplyQuestion(operand1, operand2) {
+    document.getElementById("operand1").textContent = operand1; // the id in HTML is operan1, this converts it
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = "x"; // grabs the operator id and assigns it the x sign     
 }
